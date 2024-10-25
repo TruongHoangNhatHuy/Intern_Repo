@@ -10,7 +10,7 @@ class ProductUnit(models.TextChoices):
     KILOGRAM = "kg", text("/Kg")
 
 
-# custom Manager class, allow custom method for Model class
+# custom Manager class, allow custom method at “table-level” 
 class ProductManager(models.Manager):
     # custom create method
     def create_product(self, name: str, description: str, price: int, unit: ProductUnit, quantity: int):
@@ -24,6 +24,8 @@ class ProductManager(models.Manager):
         # do something with product
         return product
 
+    def count_by_category(self, category: Category):
+        return self.get_queryset().filter(categories=category).count()
 
 class Product(models.Model):
     name = models.CharField("Tên hàng hóa", max_length=20)
