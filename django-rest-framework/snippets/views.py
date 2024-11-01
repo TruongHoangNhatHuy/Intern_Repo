@@ -1,8 +1,9 @@
 from django.http import Http404
-from rest_framework import status, mixins, generics, permissions
+from rest_framework import status, mixins, generics, permissions, renderers
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from .models import Snippet
 from .permissions import IsOwnerOrReadOnly
 from .serializers import SnippetSerializer, UserSerializer
@@ -10,6 +11,14 @@ from django.contrib.auth.models import User
 
 
 ### Generic class-based views
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
@@ -24,13 +33,13 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SnippetSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class SnippetHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
 
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
 
 
 ### Mixins (template-based) views
@@ -112,6 +121,13 @@ class UserDetail(generics.RetrieveAPIView):
 
 
 ### Function-based views
+    
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        "user": reverse("user-list", request=request, format=format),
+        "snippets": reverse("snippet-list", request=request, format=format)
+    })
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):
