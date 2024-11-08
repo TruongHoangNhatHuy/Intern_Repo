@@ -6,13 +6,27 @@
   import ReactivityFundamentals from './components/ReactivityFundamentals.vue'
   import ComputedProperties from './components/ComputedProperties.vue'
   import ClassStyleBindings from './components/ClassStyleBindings.vue'
+  import ConditionalRendering from './components/ConditionalRendering.vue'
+  import ListRendering from './components/ListRendering.vue'
+  import EventHandling from './components/EventHandling.vue'
+  import FormInputBindings from './components/FormInputBindings.vue'
 
-  const totalPage = 4
-  const page = ref(1)
+  const pages = ref([
+    TemplateSyntax,
+    ReactivityFundamentals,
+    ComputedProperties,
+    ClassStyleBindings,
+    ConditionalRendering,
+    ListRendering,
+    EventHandling,
+    FormInputBindings,
+  ])
+
+  const pageCur = ref(1)
   const pageNum = computed(() => {
-    if (page.value<1) page.value = 1
-    if (page.value>totalPage) page.value = totalPage
-    return page.value
+    if (pageCur.value<1) pageCur.value = pages.value.length
+    if (pageCur.value>pages.value.length) pageCur.value = 1
+    return pageCur.value
   })
 </script>
 
@@ -23,19 +37,20 @@
     <div class="wrapper">
       <HelloWorld msg="Vue Quickstart" />
       <div>
-        <button @click="page--">Prev</button>
-        {{ page }}
-        <button @click="page++">Next</button>
+        <button @click="pageCur--">Prev</button>
+        <select :value="pageNum" @change="pageCur=$event.target.value">
+          <option v-for="index in pages.length" :value="index">{{ index }}</option>
+        </select>
+        <button @click="pageCur++">Next</button>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- <TheWelcome /> -->
-    <TemplateSyntax v-show="pageNum==1"/>
-    <ReactivityFundamentals v-show="pageNum==2"/>
-    <ComputedProperties v-show="pageNum==3"/>
-    <ClassStyleBindings v-show="pageNum==4"/>
+    <div v-for="(child, index) in pages" :key="index">
+      <component :is="child" v-show="pageNum==index+1"/>
+      <!-- <TheWelcome /> -->
+    </div>
   </main>
 </template>
 
