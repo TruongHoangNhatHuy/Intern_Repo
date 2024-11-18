@@ -10,6 +10,9 @@
   import ListRendering from './components/ListRendering.vue'
   import EventHandling from './components/EventHandling.vue'
   import FormInputBindings from './components/FormInputBindings.vue'
+  import Watchers from './components/Watchers.vue'
+  import TemplateRefs from './components/TemplateRefs.vue'
+  import ComponentsBasics from './components/ComponentsBasics/index.vue'
 
   const pages = ref([
     TemplateSyntax,
@@ -20,6 +23,9 @@
     ListRendering,
     EventHandling,
     FormInputBindings,
+    Watchers,
+    TemplateRefs,
+    ComponentsBasics
   ])
 
   const pageCur = ref(1)
@@ -48,7 +54,7 @@
 
   <main>
     <div v-for="(child, index) in pages" :key="index">
-      <component :is="child" v-show="pageNum==index+1"/>
+      <component :is="child" v-if="pageNum==index+1"/>
       <!-- <TheWelcome /> -->
     </div>
   </main>
