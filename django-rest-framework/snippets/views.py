@@ -4,9 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from .models import Snippet
+from .models import Snippet, LANGUAGE_CHOICES
 from .permissions import IsOwnerOrReadOnly
-from .serializers import SnippetSerializer, UserSerializer
+from .serializers import SnippetSerializer, UserSerializer, LanguageSerializer
 from django.contrib.auth.models import User
 
 
@@ -36,7 +36,6 @@ class SnippetViewSet(viewsets.ModelViewSet):
     #
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
 
 ### Generic class-based views
 
@@ -156,6 +155,18 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 
 ### Function-based views
+        
+@api_view(['GET'])
+def language_list(request, format=None):
+    """
+    List all code language.
+    """
+    if request.method == 'GET':
+        serializer = LanguageSerializer(data={
+            "choice": LANGUAGE_CHOICES
+        })
+        serializer.is_valid()
+        return Response(serializer.data)
 
 # @api_view(['GET', 'POST'])
 # def snippet_list(request, format=None):

@@ -10,6 +10,7 @@ router.register(r"users", views.UserViewSet, basename="user")
 
 
 urlpatterns = [
+    path('languages/', views.language_list),
     path('', include(router.urls)),
 ]
 
