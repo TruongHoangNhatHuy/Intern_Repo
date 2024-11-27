@@ -20,7 +20,7 @@
     <ItemForm v-model="snippet" :is-readonly="false"/>
     <div class="mt-2">
       <button class="btn btn-secondary m-1" @click="$router.back()">Back</button>
-      <button class="btn btn-primary m-1" @click="postSnippet">Submit</button>
+      <button class="btn btn-success m-1" @click="postSnippet">Submit</button>
     </div>
   </div>
 </template>

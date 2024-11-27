@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
   const { data: snippets, status, refresh } = useFetch('http://127.0.0.1:8000/snippets/')
 </script>
 

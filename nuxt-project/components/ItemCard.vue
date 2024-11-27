@@ -1,13 +1,11 @@
-<script setup lang="ts">
-  const prop = defineProps<{
-    title: string,
-    content: string,
-    description: string,
-  }>()
+<script setup>
+  const prop = defineProps({
+    title: String,
+    content: String,
+    description: String,
+  })
   
-  const emit = defineEmits<{
-    (e: 'openDetail'): void
-  }>()
+  const emit = defineEmits(['openDetail'])
 </script>
 
 <template>

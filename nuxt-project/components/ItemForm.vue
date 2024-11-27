@@ -1,11 +1,9 @@
-<script setup lang="ts">
-  import type { Snippet } from '~/types';
-
+<script setup>
   const model = defineModel()
 
-  const props = defineProps<{
-    isReadonly: boolean
-  }>()
+  const props = defineProps({ 
+    isReadonly: Boolean
+  })
 
   const { data: languages, status, refresh } = useFetch(`http://127.0.0.1:8000/languages/`);
 </script>
@@ -33,7 +31,9 @@
     </div>
     <div class="row p-2">
       <label class="col-3">Linenos</label>
-      <input class="col-9" type="checkbox" v-model="model.linenos" :disabled="isReadonly">
+      <span class="col-9 form-check form-switch fs-5">
+        <input class="form-check-input" type="checkbox" v-model="model.linenos" :disabled="isReadonly">
+      </span>
     </div>
   </form>
 </template>
