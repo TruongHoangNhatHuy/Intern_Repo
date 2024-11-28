@@ -24,7 +24,7 @@ from quickstart import views
 # router.register(r"groups", views.GroupViewSet)
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
     # path('quickstart/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

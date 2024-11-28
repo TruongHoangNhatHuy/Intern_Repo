@@ -5,7 +5,9 @@
     isReadonly: Boolean
   })
 
-  const { data: languages, status, refresh } = useFetch(`http://127.0.0.1:8000/languages/`);
+  const config = useRuntimeConfig();
+
+  const { data: languages, status, refresh } = useFetch(`${config.public.serverUrl}/languages/`);
 </script>
 
 <template>

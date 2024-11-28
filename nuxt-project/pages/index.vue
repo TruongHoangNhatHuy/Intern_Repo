@@ -1,12 +1,15 @@
 <script setup>
-  const { data: snippets, status, refresh } = useFetch('http://127.0.0.1:8000/snippets/')
+  const config = useRuntimeConfig();
+  const user = useUserStore()
+  
+  const { data: snippets, status, refresh } = useFetch(`${config.public.serverUrl}/snippets/`);
 </script>
 
 <template>
   <div class="text-center">
     <div class="container">
       <div class="row row-cols-4">
-        <div class="col p-2">
+        <div v-if="user.userInfo!=null" class="col p-2">
           <div class="btn btn-primary card h-100" @click="navigateTo(`/add`)">
             <div class="card-body">
               <h3 class="fw-normal fst-italic">Add snippet</h3>

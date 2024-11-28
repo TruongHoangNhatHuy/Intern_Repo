@@ -1,7 +1,10 @@
 <script setup>
   const route = useRoute();
   const id = route.params.id;
-  const { data: snippet, status, refresh } = useFetch(`http://127.0.0.1:8000/snippets/${id}/`);
+  
+  const config = useRuntimeConfig();
+
+  const { data: snippet, status, refresh } = useFetch(`${config.public.serverUrl}/snippets/${id}/`);
 
   const editing = ref(false);
 </script>
