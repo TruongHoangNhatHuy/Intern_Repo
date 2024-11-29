@@ -14,45 +14,36 @@ export const useUserStore = defineStore('user', () => {
         urlencoded.append('client_id', config.public.oauthId)
         urlencoded.append('client_secret', config.public.oauthSecret)
 
-        let success = false
-        await useFetch(`${config.public.serverUrl}/o/token/`, {
+        const { data, status, error } = await useFetch(`${config.public.serverUrl}/o/token/`, {
             method: 'post',
             headers: { 'Content-Type': "application/x-www-form-urlencoded" },
             body: urlencoded
-        }).then(response => {
-            if (response.data.value == null) {
-                success = false
-            } else {
-                tokens.value = response.data.value
-                success = true
-            }
-        }).catch(error => {
-            success = false
         })
 
-        if (success) {
+        if (status.value==`success` && data.value!=null) {
+            tokens.value = data.value
             await getUserInfo()
+            return true
+        } else {
+            console.log(error.value)
+            return false
         }
-
-        return success
     }
 
     async function getUserInfo() {
-        return await useFetch(`${config.public.serverUrl}/users/profile/`, {
+        const { data, status, error } = await useFetch(`${config.public.serverUrl}/users/profile/`, {
             headers: {
                 "Authorization": `Bearer ${accessToken.value}`
             }
-        }).then(response => {
-            if (response.data.value == null) {
-                return false
-            } else {
-                console.log('info', response.data.value)
-                userInfo.value = response.data.value
-                return true
-            }
-        }).catch(error => {
-            return false
         })
+
+        if (status.value==`success` && data.value!=null) {
+            userInfo.value = data.value
+            return true
+        } else {
+            console.log(error.value)
+            return false
+        }
     }
 
     return { userInfo, accessToken, authenticate, getUserInfo }

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'oauth2_provider',
     "corsheaders",
+    'drf_spectacular',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -146,6 +147,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
@@ -154,6 +156,15 @@ REST_FRAMEWORK = {
 OAUTH2_PROVIDER = {
     # this is the list of available scopes
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Snippet App',
+    'DESCRIPTION': 'Django REST framework project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 
