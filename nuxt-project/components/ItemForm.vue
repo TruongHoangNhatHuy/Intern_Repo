@@ -11,14 +11,14 @@
 </script>
 
 <template>
-  <form class="card container m-0">
+  <div class="card container mw-100 m-1">
     <div class="row p-2">
       <label class="col-3">Title</label>
-      <input class="col-9" type="text" v-model="model.title" :disabled="isReadonly">
+      <input class="col-9" type="text" required v-model="model.title" :disabled="isReadonly">
     </div>
     <div class="row p-2">
       <label class="col-3">Language</label>
-      <select class="col-9" v-model="model.language" :disabled="isReadonly">
+      <select class="col-9" required v-model="model.language" :disabled="isReadonly">
         <option 
           v-if="status==`success`" 
           v-for="item in languages.choice" 
@@ -29,7 +29,7 @@
     </div>
     <div class="row p-2">
       <label class="col-3">Code</label>
-      <textarea class="col-9" rows="9" v-model="model.code" :disabled="isReadonly"/>
+      <textarea class="col-9" required rows="9" v-model="model.code" :disabled="isReadonly"/>
     </div>
     <div class="row p-2">
       <label class="col-3">Linenos</label>
@@ -37,5 +37,5 @@
         <input class="form-check-input" type="checkbox" v-model="model.linenos" :disabled="isReadonly">
       </span>
     </div>
-  </form>
+  </div>
 </template>
