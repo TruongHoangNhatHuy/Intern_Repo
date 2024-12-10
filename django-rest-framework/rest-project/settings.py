@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     "corsheaders",
     'drf_spectacular',
+    'django_vite',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -71,7 +72,7 @@ ROOT_URLCONF = 'rest-project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,6 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/"static"
+STATICFILES_DIRS = [
+  BASE_DIR/"static/dist-vue"
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -170,6 +175,7 @@ SPECTACULAR_SETTINGS = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:5500",
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True
@@ -182,3 +188,11 @@ CORS_ALLOWED_ORIGINS = [
 #     "POST",
 #     "PUT",
 # )
+
+
+DJANGO_VITE = {
+  "default": {
+    "dev_mode": False,
+    'manifest_path': BASE_DIR/"static/dist-vue/manifest.json" # if dev_mode is False
+  }
+}

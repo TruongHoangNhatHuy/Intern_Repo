@@ -1,0 +1,12 @@
+{% load static %}
+{% load django_vite %}
+
+<html>
+    <head>
+        {% vite_hmr_client %}
+        {% vite_asset "src/main.js" %}
+    </head>
+    <body>
+        <div id="app"></div>
+    </body>
+</html>
