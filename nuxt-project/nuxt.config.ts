@@ -37,4 +37,10 @@ export default defineNuxtConfig({
       ],
     },
   },
+  vite: {
+    base: "/static/",
+    build: {
+      manifest: "manifest.json",
+    }
+  }
 })

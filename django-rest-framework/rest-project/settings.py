@@ -136,7 +136,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR/"static"
 STATICFILES_DIRS = [
-  BASE_DIR/"static/dist-vue"
+#   BASE_DIR/"static/dist-vue",
+  BASE_DIR/"static/dist-nuxt/client/_nuxt",
 ]
 
 # Default primary key field type
@@ -193,6 +194,7 @@ CORS_ALLOWED_ORIGINS = [
 DJANGO_VITE = {
   "default": {
     "dev_mode": False,
-    'manifest_path': BASE_DIR/"static/dist-vue/manifest.json" # if dev_mode is False
+    # 'manifest_path': BASE_DIR/"static/dist-vue/manifest.json" # if dev_mode is False
+    'manifest_path': BASE_DIR/"static/dist-nuxt/server/client.manifest.json" # if dev_mode is False
   }
 }
