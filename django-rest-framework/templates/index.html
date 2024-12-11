@@ -1,0 +1,34 @@
+{% load static %}
+{% load django_vite %}
+
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="{% static '/builds/meta/affd3be3-828f-4fed-9a2b-50b3909858e1.json' %}">
+        {% vite_hmr_client %}
+        {% vite_asset "node_modules/nuxt/dist/app/entry.js" %}
+    </head>
+    <body>
+        <div id="__nuxt"></div>
+        <div id="teleports"></div>
+        <script type="application/json" data-nuxt-data="nuxt-app" data-ssr="false" id="__NUXT_DATA__">[{"prerenderedAt":1,"serverRendered":2},1733885303356,false]</script>
+        <script>
+            window.__NUXT__ = {}; 
+            window.__NUXT__.config = { 
+                public: { 
+                    serverUrl: "http://127.0.0.1:8000/api", 
+                    // TODO: hide secret in .env file
+                    oauthId: "88O0UVFkxiafTyTduL2xsJdcMZhbdYdR9QWFQrlr", 
+                    oauthSecret: "WlmWOb5VSTuYTsdcPaLSBlapclSF6GJSm6ubJNaIgccmJAziZ5C3m2YBRp7ldVvvxCQf4gfkSkAnXN8gC8VftHx88hlnK2PyrRgkloZHpW5DWGlKiDbt7EMDszFFRj3f" 
+                }, 
+                app: { 
+                    baseURL: "/", 
+                    buildId: "affd3be3-828f-4fed-9a2b-50b3909858e1", 
+                    buildAssetsDir: "/static/", // change assets dir
+                    cdnURL: "" 
+                } 
+            }
+        </script>
+    </body>
+</html>

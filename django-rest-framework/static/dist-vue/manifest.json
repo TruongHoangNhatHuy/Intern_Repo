@@ -1,0 +1,23 @@
+{
+  "src/App.vue": {
+    "file": "assets/vue-ChoHznjt.js",
+    "name": "vue",
+    "src": "src/App.vue",
+    "isEntry": true,
+    "css": [
+      "assets/vue-DPk4cAfJ.css"
+    ]
+  },
+  "src/main.js": {
+    "file": "assets/main-fUa7Wxvn.js",
+    "name": "main",
+    "src": "src/main.js",
+    "isEntry": true,
+    "imports": [
+      "src/App.vue"
+    ],
+    "css": [
+      "assets/main-DViQtWzG.css"
+    ]
+  }
+}
