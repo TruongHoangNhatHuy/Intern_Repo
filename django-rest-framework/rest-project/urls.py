@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 from rest_framework import routers
 from quickstart import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -25,7 +26,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 # router.register(r"groups", views.GroupViewSet)
 
 urlpatterns = [
-    path('', include('snippets.urls')),
+    path('', TemplateView.as_view(template_name='index.html'), name='client'),
+    path('api/', include('snippets.urls')),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "docs/",

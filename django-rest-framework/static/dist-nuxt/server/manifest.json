@@ -1,0 +1,8 @@
+{
+  "node_modules/nuxt/dist/app/entry-spa.js": {
+    "file": "server.mjs",
+    "name": "server",
+    "src": "node_modules/nuxt/dist/app/entry-spa.js",
+    "isEntry": true
+  }
+}
